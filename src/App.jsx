@@ -62,27 +62,48 @@ function App() {
   return (
     <>
       <div className="container">
-        <div className="inputs">
-          <div>
-            <Input_bill bill={bill} handlebill={handlebill} />
+        <div className="content">
+          <div className="inputs">
+            <div>
+              <Input_bill bill={bill} handlebill={handlebill} />
+            </div>
+            <div>
+              <p>Select tip</p>
+              <div className="tip">
+                {tip.map((tip) => (
+                  <Tip
+                    key={tip.id}
+                    value={tip.value}
+                    tip={tip.tip}
+                    storetip={storetip}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div>
+              <Input_person setperson={setperson} />
+            </div>
           </div>
-          <div className="tip">
-            {tip.map((tip) => (
-              <Tip
-                key={tip.id}
-                value={tip.value}
-                tip={tip.tip}
-                storetip={storetip}
-              />
-            ))}
+          <div className="Outputs">
+            <div className="amount">
+              <div className="tipamountdiv">
+                <p>
+                  Tip Amount <br />/ Person
+                </p>
+                <Tipamout />
+              </div>
+              <div className="totalamountdiv">
+                <p>
+                  Total <br />/ Person
+                </p>
+                <Total />
+              </div>
+            </div>
+            <div className="reset">
+              <ResetBtn />
+            </div>
           </div>
-          <div>
-            <Input_person setperson={setperson} />
-          </div>
-        </div>
-        <div className="Outputs">
-          <Tipamout />
-          <Total />
         </div>
       </div>
 
@@ -101,6 +122,14 @@ function Show_data({ isbill, istp, isnu }) {
         {istp}
         {isnu}
       </h1>
+    </div>
+  );
+}
+
+function ResetBtn() {
+  return (
+    <div>
+      <button className="reset">Reset</button>
     </div>
   );
 }
@@ -143,14 +172,19 @@ function Tip({ key, value, tip, storetip }) {
 function Input_person({ setperson }) {
   return (
     <div>
-      <input type="number" onChange={(e) => setperson(e.target.value)} />
+      <p>Number of People</p>
+      <input
+        className="input"
+        type="number"
+        onChange={(e) => setperson(e.target.value)}
+      />
     </div>
   );
 }
 
 function Tipamout() {
   return (
-    <div>
+    <div className="tipamount">
       <input type="text" />
     </div>
   );
@@ -158,7 +192,7 @@ function Tipamout() {
 
 function Total() {
   return (
-    <div>
+    <div className="total">
       <input type="text" />
     </div>
   );
