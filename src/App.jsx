@@ -40,6 +40,8 @@ function App() {
   const [isbill, setisbill] = useState(0);
   const [istp, setistp] = useState(0);
   const [isnu, setisnu] = useState(0);
+  const [totalperson, settotalperson] = useState(0);
+  const [totaltip, settotaltip] = useState(0);
   // const
   function handlebill(bill) {
     setbill(bill);
@@ -91,13 +93,13 @@ function App() {
                 <p>
                   Tip Amount <br />/ Person
                 </p>
-                <Tipamout />
+                <Tipamout totaltip={totaltip} />
               </div>
               <div className="totalamountdiv">
                 <p>
                   Total <br />/ Person
                 </p>
-                <Total />
+                <Total totalperson={totalperson} />
               </div>
             </div>
             <div className="reset">
@@ -163,7 +165,7 @@ function Tip({ key, value, tip, storetip }) {
           name=""
           id=""
           placeholder="Custom"
-          onChange={() => storetip(value)}
+          onChange={(e) => storetip(e.target.value)}
         />
       )}
     </div>
@@ -182,18 +184,18 @@ function Input_person({ setperson }) {
   );
 }
 
-function Tipamout() {
+function Tipamout({ totaltip }) {
   return (
     <div className="tipamount">
-      <input type="text" />
+      <input type="text" value={totaltip} />
     </div>
   );
 }
 
-function Total() {
+function Total({ totalperson }) {
   return (
     <div className="total">
-      <input type="text" />
+      <input type="text" value={totalperson} />
     </div>
   );
 }
